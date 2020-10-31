@@ -18,9 +18,12 @@ function TodoForm() {
   }
   return (
     <>
-      <textarea onChange={(e) => { setTodo(e.target.value) }} />
-      <button onClick={handleOnClick}>Add</button>
+      <span className='form'>
+        <textarea placeholder='add todo...' cols='50' rows='3' onChange={(e) => { setTodo(e.target.value) }} />
+        <button className='add-button' onClick={handleOnClick}>Add</button>
+      </span>
       <TodoList />
+
     </>
   )
 }

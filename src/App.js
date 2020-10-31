@@ -1,6 +1,5 @@
 import './App.css';
 
-import firebase from './firebase';
 import TodoForm from './components/todoform/TodoForm';
 
 function App() {
