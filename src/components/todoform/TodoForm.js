@@ -7,7 +7,7 @@ function TodoForm() {
   const handleOnClick = (e) => {
     e.preventDefault();
     const todo = textRef.current.value;
-    firebase.firestore()
+    todo && firebase.firestore()
       .collection('todolist')
       .add({ todo: todo })
       .then(() => { textRef.current.value = '' })
@@ -15,12 +15,13 @@ function TodoForm() {
 
   return (
     <>
-      <span className='form'>
-        <input className='text-input' placeholder='add todo...' ref={textRef} />
-        <button className='add-button' onClick={handleOnClick}>Add</button>
+      <span className='container'>
+        <form onSubmit={handleOnClick}>
+          <input className='text-input' placeholder='add todo...' ref={textRef} />
+          <button className='add-button' onClick={handleOnClick}>Add</button>
+        </form>
+        <TodoList />
       </span>
-      <TodoList />
-
     </>
   )
 }

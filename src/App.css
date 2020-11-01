@@ -1,24 +1,31 @@
 .App {
   text-align: center;
-  display: flex;
+  display: grid;
 }
 
-ul {
+.container {
+  
+}
+
+.list-container {
+  display: inline-grid;
+  width: 100%;
+  
   list-style-type: none;
   padding-inline-start: 0%;
-  display: inline-table;
-  width:60%;
 }
 
 
 li {
+  display: grid;
+  grid-template-columns: 3fr 0.2fr 0.1fr;
+  column-gap: 5px;
   font-size: 20px;
   padding: 20px;
   margin: 5px;
   background-color: lightgrey;
 }
 .form {
-  display: inline-flex;
 }
 
 
@@ -30,13 +37,23 @@ li {
   font-size: 18px;
 }
 
-.delete-button {
-  position: absolute; 
-  right: 300px;  
-}
+ .delete-button {
+   padding: 5px;
+} 
 
 .text-input {
   font-size: 20px;
   padding: 10px;
   margin: 10px;
+}
+
+@media only screen and (min-width : 480px) {
+
+  .list-container {
+    display: inline-grid;
+    width: 60%;
+    list-style-type: none;
+    padding-inline-start: 0%;
+  }
+
 }

@@ -7,6 +7,7 @@ function TodoList() {
   const [todolist, setTodolist] = useState([]);
   const [isEditable, setIsEditable] = useState(false);
   const [currentTodoValue, setCurrentTodoValue] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(null);
 
   useEffect(() => {
     firebase
@@ -27,14 +28,15 @@ function TodoList() {
       }).catch((error) => console.log('error deleting the document', error));
   }
 
-  const handleEdit = () => {
-    setIsEditable(true)
+  const handleEdit = (index) => {
+    setIsEditable(true);
+    setCurrentIndex(index);
     console.log(currentTodoValue);
 
   };
 
   const handleSave = (doc) => {
-    firebase.firestore()
+    currentTodoValue && firebase.firestore()
       .collection('todolist')
       .where("todo", "==", doc.todo)
       .get().then(
@@ -42,19 +44,20 @@ function TodoList() {
       ).catch((error) => console.log('error updating the document', error));
 
     setCurrentTodoValue(null);
+    setCurrentIndex(null);
     setIsEditable(false);
   }
 
   const renderList = () => {
     return (
-      <ul className='list-item'>
+      <ul className='list-container'>
         {todolist.map((i, index) => <li key={index}>
-          {isEditable ? <><textarea defaultValue={i.todo} onChange={(e) => setCurrentTodoValue(e.target.value)} />
+          {index === currentIndex && isEditable ? <><textarea defaultValue={i.todo} onChange={(e) => setCurrentTodoValue(e.target.value)} />
             <button onClick={() => handleSave(i)}>save</button> </> :
             <>
               {i.todo}
-              <button className='delete-button' onClick={() => handleDelete(i)}>x</button>
-              <button className='edit-button' onClick={handleEdit}>edit</button></>}
+              <button className='edit-button' onClick={() => handleEdit(index)}>edit</button>
+              <button className='delete-button' onClick={() => handleDelete(i)}>x</button></>}
         </li>)}
       </ul>
     )
