@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  display: block;
+  display: flex;
 }
 
 ul {
@@ -35,7 +35,7 @@ li {
   right: 300px;  
 }
 
-textarea {
+.text-input {
   font-size: 20px;
   padding: 10px;
   margin: 10px;

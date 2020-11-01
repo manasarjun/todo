@@ -1,25 +1,22 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import TodoList from "../todoList/TodoList";
 import firebase from '../../firebase';
 
 function TodoForm() {
-  const [todo, setTodo] = useState('');
+  const textRef = useRef(null);
   const handleOnClick = (e) => {
     e.preventDefault();
-    firebase.firestore().collection('todolist').add(
-      {
-        todo: todo
-      },
-    ).then(
-      setTodo(''),
-    )
-
-
+    const todo = textRef.current.value;
+    firebase.firestore()
+      .collection('todolist')
+      .add({ todo: todo })
+      .then(() => { textRef.current.value = '' })
   }
+
   return (
     <>
       <span className='form'>
-        <textarea placeholder='add todo...' cols='50' rows='3' onChange={(e) => { setTodo(e.target.value) }} />
+        <input className='text-input' placeholder='add todo...' ref={textRef} />
         <button className='add-button' onClick={handleOnClick}>Add</button>
       </span>
       <TodoList />
