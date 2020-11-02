@@ -13,6 +13,9 @@ function TodoForm() {
       .then(() => { textRef.current.value = '' })
   }
 
+  //TODO: add status to Todo
+  //TODO: add sort option      
+
   return (
     <>
       <span className='container'>
