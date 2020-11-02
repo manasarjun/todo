@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import firebase from "../../firebase";
 
 import '../../App.css';
@@ -52,12 +52,12 @@ function TodoList() {
     return (
       <ul className='list-container'>
         {todolist.map((i, index) => <li key={index}>
-          {index === currentIndex && isEditable ? <><textarea defaultValue={i.todo} onChange={(e) => setCurrentTodoValue(e.target.value)} />
-            <button onClick={() => handleSave(i)}>save</button> </> :
-            <>
+          {index === currentIndex && isEditable ? <Fragment><textarea defaultValue={i.todo} onChange={(e) => setCurrentTodoValue(e.target.value)} />
+            <button onClick={() => handleSave(i)}>save</button> </Fragment> :
+            <Fragment>
               {i.todo}
               <button className='edit-button' onClick={() => handleEdit(index)}>edit</button>
-              <button className='delete-button' onClick={() => handleDelete(i)}>x</button></>}
+              <button className='delete-button' onClick={() => handleDelete(i)}>x</button></Fragment>}
         </li>)}
       </ul>
     )

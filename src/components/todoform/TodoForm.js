@@ -13,19 +13,14 @@ function TodoForm() {
       .then(() => { textRef.current.value = '' })
   }
 
-  //TODO: add status to Todo
-  //TODO: add sort option      
-
   return (
-    <>
-      <span className='container'>
-        <form onSubmit={handleOnClick}>
-          <input className='text-input' placeholder='add todo...' ref={textRef} />
-          <button className='add-button' onClick={handleOnClick}>Add</button>
-        </form>
-        <TodoList />
-      </span>
-    </>
+    <span className='container'>
+      <form onSubmit={handleOnClick}>
+        <input className='text-input' placeholder='add todo...' ref={textRef} />
+        <button className='add-button' onClick={handleOnClick}>Add</button>
+      </form>
+      <TodoList />
+    </span>
   )
 }
 
